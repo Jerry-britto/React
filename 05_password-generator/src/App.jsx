@@ -23,7 +23,13 @@ function App() {
     setPassword(pass);
   },[length,numberAllowed,charAllowed,setPassword])
   
-  const copyPasswordToClipBoard = useCallback(()=>{
+  const copyPasswordToClipBoard = useCallback((e)=>{
+    e.target.classList.add("bg-green-800")
+    e.target.textContent = "Copied";
+    setTimeout(()=>{
+      e.target.classList.remove("bg-green-800")
+      e.target.textContent = 'Copy'
+    },2000)
     passwordRef.current?.select() // to select just the text
     passwordRef.current?.setSelectionRange(0,101) //to select a certain portion
     window.navigator.clipboard.writeText(password) //to copy password
